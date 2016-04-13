@@ -18,8 +18,8 @@ function AllocationsHandler(db) {
          ** Would anything prevent an attacker from   **
          ** accessing a different user account?       **
          ***********************************************/
-        var userId = req.params.userId;
-
+        var userId = req.session.userId;
+        //Vulnerability fixed
         allocationsDAO.getByUserId(userId, function(err, docs) {
             if (err) return next(err);
 
