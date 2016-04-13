@@ -32,21 +32,6 @@ Input forms that are relayed back to the user (such as the username) allow html 
 Change line 72 to read "autoescape: true"
 This reenables swig (the template engine)'s autoescaping so that stored XSS no longer works
 
-
-<<<<<<< HEAD
-## Attack 4 
-#### Unprotected endpoint at /allocations
-Any logged in user can access any other users allocations page
-
-#### Description
-The allocations page has a check to ensure a user is logged in, but performs the db lookup in the allocations collection using a user id passed in by a query parameter, which does not have to be tied to the user logged in. Therefore a user can be logged into any account, hit the /allocations/1 endpoint, and be shown the admin user's allocation page.
-
-#### Files
-/app/routes/allocations.js
-
-#### Fix
-Change line 21	to use session variable (req.session.userId) instead of query parameter (req.params.userId)
-=======
 ## Attack 3
 #### Vulnerability: Arbitrary Code Execution on Server
 
@@ -61,4 +46,17 @@ Instead, `parseInt()` should be used to perform this conversion.
 #### Fix
 Change line 72 to read "autoescape: true"
 This reenables swig (the template engine)'s autoescaping so that stored XSS no longer works
->>>>>>> origin/master
+
+## Attack 4 
+#### Unprotected endpoint at /allocations
+Any logged in user can access any other users allocations page
+
+#### Description
+The allocations page has a check to ensure a user is logged in, but performs the db lookup in the allocations collection using a user id passed in by a query parameter, which does not have to be tied to the user logged in. Therefore a user can be logged into any account, hit the /allocations/1 endpoint, and be shown the admin user's allocation page.
+
+#### Files
+/app/routes/allocations.js
+
+#### Fix
+Change line 21	to use session variable (req.session.userId) instead of query parameter (req.params.userId)
+
