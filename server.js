@@ -69,7 +69,8 @@ MongoClient.connect(config.db, function(err, db) {
     // Template system setup
     swig.setDefaults({
         // Autoescape disabled
-        autoescape: false
+        // FIX 2: enable escaping
+        autoescape: true
     });
 
     // Insecure HTTP connection
