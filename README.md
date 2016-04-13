@@ -2,35 +2,35 @@
 Group 45
 
 ## Attack 1
-### Vulnerability
+#### Vulnerability
 too much information is leaked on login attempts
 
-### Files
+#### Files
 /route/session.js
 
-### Description
+#### Description
 When attempting a login, two possible error messages are returned: "Invalid username" or "Invalid password." This allows an attacker to learn if a username exists, which is more information than is needed in reporting the login error. This would allow an attacker to learn every username via brute force, or alternatively would allow an attacker to check if known usernames from previous data leaks exist on this website as well.
 
 Instead, only a single error message should be returned ("Invalid username or password")
 
 
-### Fix
+#### Fix
 Change line 67 and 75 to read: `loginError: "Invalid username or password"`
 
 
 ## Attack 2
-### Vulnerability
+#### Vulnerability
 too much information is leaked on login attempts
 
-### Files
+#### Files
 /route/session.js
 
-### Description
+#### Description
 When attempting a login, two possible error messages are returned: "Invalid username" or "Invalid password." This allows an attacker to learn if a username exists, which is more information than is needed in reporting the login error. This would allow an attacker to learn every username via brute force, or alternatively would allow an attacker to check if known usernames from previous data leaks exist on this website as well.
 
 Instead, only a single error message should be returned ("Invalid username or password")
 
 
-### Fix
+#### Fix
 Change line 67 and 75 to read: `loginError: "Invalid username or password"`
 
