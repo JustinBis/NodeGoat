@@ -2,7 +2,7 @@
 Group 45
 
 ## Attack 1
-#### Vulnerability
+#### Vulnerability: Information Leak
 too much information is leaked on login attempts
 
 #### Files
@@ -19,8 +19,8 @@ Change line 67 and 75 to read: `loginError: "Invalid username or password"`
 
 
 ## Attack 2
-#### Vulnerability
-too much information is leaked on login attempts
+#### Vulnerability: XSS
+Forms on the site do not sanitize inputs properly to remove html
 
 #### Files
 /route/session.js
