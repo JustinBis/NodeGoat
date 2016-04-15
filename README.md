@@ -60,3 +60,16 @@ The allocations page has a check to ensure a user is logged in, but performs the
 #### Fix
 Change line 21	to use session variable (req.session.userId) instead of query parameter (req.params.userId)
 
+## Attack 5
+#### Unprotected endpoint at /benefits
+Any logged in user can access the benefits page
+
+#### Description
+The benefits page can have anyone (not just the admin) access it
+
+#### Files
+/app/routes/index.js
+
+#### Fix
+Added function isAdminLoggedIn, checking userId to be admin before accessing the benefits page
+

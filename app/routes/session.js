@@ -28,6 +28,14 @@ function SessionHandler(db) {
         }
     };
 
+    this.isAdminLoggedInMiddleware = function (req, res, next) {
+        if (req.session.userId === "admin") {
+            next();
+        } else {
+            return res.redirect("/login");
+        }
+    }
+
     this.displayLoginPage = function(req, res, next) {
         return res.render("login", {
             userName: "",
