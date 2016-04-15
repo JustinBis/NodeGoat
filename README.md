@@ -73,3 +73,15 @@ The benefits page can have anyone (not just the admin) access it
 #### Fix
 Added function isAdminLoggedIn, checking userId to be admin before accessing the benefits page
 
+## Attack 6
+#### Password creation strength weak
+
+#### Description
+Password creation strength weak
+
+#### Files
+/app/routes/session.js
+
+#### Fix
+Added better regex test for password strength
+
