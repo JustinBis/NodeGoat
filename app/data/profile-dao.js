@@ -1,3 +1,22 @@
+var crypto = require('crypto'),
+    algorithm = 'aes-256-ctr',
+    password = 'd6F3Efeq';
+
+function encrypt(text){
+  var cipher = crypto.createCipher(algorithm,password)
+  var crypted = cipher.update(text,'utf8','hex')
+  crypted += cipher.final('hex');
+  return crypted;
+}
+ 
+function decrypt(text){
+  var decipher = crypto.createDecipher(algorithm,password)
+  var dec = decipher.update(text,'hex','utf8')
+  dec += decipher.final('utf8');
+  return dec;
+}
+
+
 /* The ProfileDAO must be constructed with a connected database object */
 function ProfileDAO(db) {
 
@@ -38,7 +57,7 @@ function ProfileDAO(db) {
             user.bankRouting = bankRouting;
         }
         if (ssn) {
-            user.ssn = ssn; //<- what if your server gets hacked?
+            user.ssn = encrypt(ssn);//crypto.AES.encrypt(ssn, insecureSecret); //<- what if your server gets hacked?
             //encrypt sensitive fields!
         }
         if (dob) {
@@ -72,6 +91,9 @@ function ProfileDAO(db) {
                 // sending it back to the user, so if you encrypted
                 // fields when you inserted them, you need to decrypt
                 // them before you can use them.
+                if(user.ssn){
+                     user.ssn = decrypt(user.ssn);
+                }
                 callback(null, user);
             }
         );

@@ -1,5 +1,4 @@
 var bcrypt = require("bcrypt-nodejs");
-
 /* The UserDAO must be constructed with a connected database object */
 function UserDAO(db) {
 
@@ -28,7 +27,7 @@ function UserDAO(db) {
             firstName: firstName,
             lastName: lastName,
             benefitStartDate: this.getRandomFutureDate(),
-            password: password //received from request param
+            password: bcrypt.hashSync(password) //received from request param
         };
 
         // Add email if set
@@ -69,7 +68,7 @@ function UserDAO(db) {
         function validateUserDoc(err, user) {
 
             if (err) return callback(err, null);
-
+            console.log(user)
             if (user) {
                 if (comparePassword(password, user.password)) {
                     callback(null, user);
@@ -88,8 +87,10 @@ function UserDAO(db) {
         }
 
         // Helper function to compare passwords
-        function comparePassword(fromDB, fromUser) {
-            return fromDB === fromUser;
+        function comparePassword(fromUser, fromDB) {
+            //return fromDB === fromUser;
+            console.log(fromUser,fromDB)
+            return bcrypt.compareSync(fromUser, fromDB);
             //if you encrypt your password, you have to decrypt here
             //better to use the bcrypt.compareSync function
         }

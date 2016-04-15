@@ -85,3 +85,20 @@ Password creation strength weak
 #### Fix
 Added better regex test for password strength
 
+## Attack 7
+#### Passwords stored in plaintext
+
+#### Files
+/app/data/user-dao.js
+
+#### Fix
+line 30 / 93, Used bcrypt to has passwords
+
+## Attack 8
+#### SSN stored in plaintext
+
+#### Files
+/app/data/profile-dao.js
+
+#### Fix
+Used crypto for aes encryption
